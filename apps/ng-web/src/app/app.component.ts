@@ -41,6 +41,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
       // Get all the small component elements
         let num = 0;
         let rownum = 0
+        var focusdiv:any;
       if (colorGridWidth) {
         const rows = colorGridWidth.querySelectorAll('.flex'); // Select all rows
           let rowWidth = 0;
@@ -50,9 +51,13 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
               rownum +=1
               num +=1
             }
+            
             colorGridItems.forEach((item: any,i1:number) => {
               if(i == 0){
                 rowWidth += item.offsetWidth;
+              }
+              if(item.getAttribute('ng-reflect-value') == this.ColorGridSelectComponent?.value){
+                focusdiv=item
               }
               i1+=1
               item.id1 = 'row-'+rownum+'-item-'+i1
@@ -62,6 +67,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
           })
       
           this.rowWidth.set(rowWidth)
+          focusdiv.focus();
        
       }
 
